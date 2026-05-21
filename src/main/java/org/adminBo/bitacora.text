@@ -1,0 +1,16 @@
+src
+└── main
+    └── java
+        └── org
+            └── adminBo
+                ├── controller
+                ├── dto /
+                ├── contact
+                ├── entity
+                ├── repository
+                ├── service
+                ├── utils
+                ├── config
+                ├── exception
+                └── OpenApiServicesApplication.java
+        resources/
