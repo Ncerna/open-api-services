@@ -1,16 +1,12 @@
 # open-api-services
 Payment integration with PayPal and Mercado Pago
-# open-api-services
-Payment integration with PayPal and Mercado Pago
-# Open API Services
-
 Backend API developed with Spring Boot for e-commerce and payment processing.
 
 ---
 
 ## ⚙️ Tech Stack
 
-- Java 21+
+- Java 17+
 - Spring Boot
 - JPA / Hibernate
 - posgresSQl
@@ -187,36 +183,38 @@ POST /api/payments/payment-pp
 
 This endpoint receives PayPal payment confirmation data including payer info, items purchased, and transaction details.
 
+```json
 {
-"paypal_id": "12079938WL67974329",
-"payer": {
-"name": "John Doe",
-"email": "danielchaveztorriel1234@gmail.com",
-"country": "PE"
-},
-"items": [
-{
-"id": 1,
-"name": "Sistema de Nóminas",
-"price": 3,
-"quantity": 1,
-"subtotal": 3
+  "paypal_id": "12079938WL67974329",
+  "payer": {
+    "name": "John Doe",
+    "email": "donejon@gmail.com",
+    "country": "PE"
+  },
+  "items": [
+    {
+      "id": 1,
+      "name": "zapatillas adidas talla 42",
+      "price": 3,
+      "quantity": 1,
+      "subtotal": 3
+    }
+  ],
+  "total": 3,
+  "currency": "USD",
+  "status": "COMPLETED",
+  "date": "2026-05-21T04:03:17.279Z"
 }
-],
-"total": 3,
-"currency": "USD",
-"status": "COMPLETED",
-"date": "2026-05-21T04:03:17.279Z"
-}
+```
 
 ## Response
-
+```json
 {
 "status": true,
 "message": "PayPal sale created successfully",
 "data": "12079938WL67974329"
 }
-
+```
 ## Description
 
 This endpoint:
@@ -258,6 +256,7 @@ This endpoint creates a Mercado Pago Checkout preference using the shopping cart
 POST /api/payments/payment-mp-create-preference
 
 ## Request Body
+```json
 {
 "total": 120,
 "username": "lince2000",
@@ -273,8 +272,9 @@ POST /api/payments/payment-mp-create-preference
 }
 ]
 }
-
+```
 ## Response
+```json
 {
 "success": true,
 "data": {
@@ -283,7 +283,7 @@ POST /api/payments/payment-mp-create-preference
 "total": 120
 }
 }
-
+```
 ## Description
 This endpoint:
 - Creates an internal order with status PENDING
@@ -293,6 +293,7 @@ This endpoint:
 - Returns preferenceId for frontend checkout
 
 ## Frontend Usage
+```json
 const mp = new MercadoPago("PUBLIC_KEY");
 
 mp.checkout({
@@ -304,7 +305,7 @@ container: "#wallet-container",
 label: "Pay"
 }
 });
-
+```
 ## Flow
 Frontend → Create Preference API → Backend → Order PENDING → Mercado Pago → Checkout → Webhook → Payment Confirmation
 
@@ -324,7 +325,7 @@ POST /api/payments/payment-webhook
 
 ## Request Body (WebhookDTO)
 This endpoint receives a webhook event from Mercado Pago containing payment, payer, and order information.
-
+```json
 {
 "id": 1234567890,
 "status": "approved",
@@ -358,15 +359,15 @@ This endpoint receives a webhook event from Mercado Pago containing payment, pay
 ]
 }
 }
-
+```
 ## Response
-
+```json
 {
 "status": true,
 "message": "MercadoPago sale created successfully",
 "data": "1485337134069"
 }
-
+```
 ## Description
 
 This endpoint:
