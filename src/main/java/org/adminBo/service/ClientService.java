@@ -1,10 +1,8 @@
 package org.adminBo.service;
 
 import org.adminBo.contact.IClientService;
-import org.adminBo.dto.payment.WebhookDTO;
 import org.adminBo.entity.Client;
 import org.adminBo.repository.ClientRepository;
-import org.adminBo.utils.PaymentMapper;
 import org.springframework.stereotype.Service;
 
 
@@ -31,13 +29,7 @@ public class ClientService
         return repository.save(client);
     }
     @Override
-    public Client findOrCreate(
-            String email,
-            Client client
-    ) {
-        return repository.findByEmail(email)
-                .orElseGet(() ->
-                        repository.save(client)
-                );
+    public Client findOrCreate(  String email, Client client) {
+        return repository.findByEmail(email) .orElseGet(() -> repository.save(client));
     }
 }

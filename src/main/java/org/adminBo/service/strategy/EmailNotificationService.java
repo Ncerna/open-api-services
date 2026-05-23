@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @Qualifier("emailNotificationService")
+
 public class EmailNotificationService implements INotificationService {
 
     private final JavaMailSender mailSender;

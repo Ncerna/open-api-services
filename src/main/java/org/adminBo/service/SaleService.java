@@ -14,7 +14,6 @@ public class SaleService implements ISaleService {
     }
     @Override
     public Sale save(Sale sale) {
-
         return repository.save(sale);
     }
 

@@ -9,6 +9,7 @@ import org.adminBo.wrapper.ApiResponse;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -28,18 +29,13 @@ public class CategoryService implements ICategoryService {
     @Override
     public ApiResponse<List<CategoryResponseDTO>> findAll() {
 
-        List<CategoryResponseDTO> list = repository.findAll()
-                .stream()
-                .map(category ->
-                        modelMapper.map(
-                                category,
-                                CategoryResponseDTO.class
-                        )
-                )
-                .toList();
-
+        List<Category> categories = repository.findAll();
+        List<CategoryResponseDTO> list = new ArrayList<>();
+        for (Category category : categories) {
+            CategoryResponseDTO dto = modelMapper.map(category, CategoryResponseDTO.class);
+            list.add(dto);
+        }
         return ApiResponse.<List<CategoryResponseDTO>>builder()
-
                 .data(list)
                 .build();
     }
