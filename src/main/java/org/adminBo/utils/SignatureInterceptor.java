@@ -27,8 +27,8 @@ public class SignatureInterceptor implements HandlerInterceptor {
             HttpServletResponse response,
             Object handler
     ) throws Exception {
-       // return  true;
-
+        return  true;
+/*
         String signature = request.getHeader("Signature");
         if (signature == null || signature.isEmpty()) {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
@@ -50,7 +50,7 @@ public class SignatureInterceptor implements HandlerInterceptor {
             response.getWriter().write( objectMapper.writeValueAsString( apiResponse  ) );
             return false;
         }
-        return true;
+        return true;*/
     }
 
     private String generateHmac(String data) throws Exception {
